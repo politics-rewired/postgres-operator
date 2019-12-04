@@ -490,8 +490,14 @@ new
         {{#if enableMasterLoadBalancer}}
         enableMasterLoadBalancer: true
         {{/if}}
+        {{#if masterLoadBalancerIP}}
+        masterLoadBalancerIP: true
+        {{/if}}
         {{#if enableReplicaLoadBalancer}}
         enableReplicaLoadBalancer: true
+        {{/if}}
+        {{#if replicaLoadBalancerIP}}
+        replicaLoadBalancerIP: true
         {{/if}}
         volume:
           size: "{{ volumeSize }}Gi"

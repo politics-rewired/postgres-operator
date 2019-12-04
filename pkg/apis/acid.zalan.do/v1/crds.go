@@ -194,8 +194,18 @@ var PostgresCRDResourceValidation = apiextv1beta1.CustomResourceValidation{
 					"enableMasterLoadBalancer": {
 						Type: "boolean",
 					},
+					"masterLoadBalancerIP": {
+						Type:     "string",
+						Nullable: true,
+						Pattern: "^(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])$",
+					},
 					"enableReplicaLoadBalancer": {
 						Type: "boolean",
+					},
+					"replicaLoadBalancerIP": {
+						Type:     "string",
+						Nullable: true,
+						Pattern: "^(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])$",
 					},
 					"enableShmVolume": {
 						Type: "boolean",

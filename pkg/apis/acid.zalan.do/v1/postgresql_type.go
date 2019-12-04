@@ -37,6 +37,10 @@ type PostgresSpec struct {
 	EnableMasterLoadBalancer  *bool `json:"enableMasterLoadBalancer,omitempty"`
 	EnableReplicaLoadBalancer *bool `json:"enableReplicaLoadBalancer,omitempty"`
 
+	// vars to specify IP address for master/replica LoadBalancers
+	MasterLoadBalancerIP  *string `json:"masterLoadBalancerIP"`
+	ReplicaLoadBalancerIP *string `json:"replicaLoadBalancerIP"`
+
 	// deprecated load balancer settings maintained for backward compatibility
 	// see "Load balancers" operator docs
 	UseLoadBalancer     *bool `json:"useLoadBalancer,omitempty"`

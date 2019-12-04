@@ -587,6 +587,17 @@ def update_postgresql(namespace: str, cluster: str):
         if 'enableReplicaLoadBalancer' in o['spec']:
             del o['spec']['enableReplicaLoadBalancer']
 
+    if 'replicaLoadBalancerIP' in postgresql['spec']:
+        rlb = postgresql['spec']['replicaLoadBalancerIP']
+        if not rlb:
+            if 'replicaLoadBalancerIP' in o['spec']:
+                del o['spec']['replicaLoadBalancerIP']
+        else:
+            spec['replicaLoadBalancerIP'] = True
+    else:
+        if 'replicaLoadBalancerIP' in o['spec']:
+            del o['spec']['replicaLoadBalancerIP']
+
     if 'enableMasterLoadBalancer' in postgresql['spec']:
         rlb = postgresql['spec']['enableMasterLoadBalancer']
         if not rlb:
@@ -597,6 +608,17 @@ def update_postgresql(namespace: str, cluster: str):
     else:
         if 'enableMasterLoadBalancer' in o['spec']:
             del o['spec']['enableMasterLoadBalancer']
+
+    if 'masterLoadBalancerIP' in postgresql['spec']:
+        rlb = postgresql['spec']['masterLoadBalancerIP']
+        if not rlb:
+            if 'masterLoadBalancerIP' in o['spec']:
+                del o['spec']['masterLoadBalancerIP']
+        else:
+            spec['masterLoadBalancerIP'] = True
+    else:
+        if 'masterLoadBalancerIP' in o['spec']:
+            del o['spec']['masterLoadBalancerIP']
 
     if 'users' in postgresql['spec']:
         spec['users'] = postgresql['spec']['users']

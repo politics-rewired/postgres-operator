@@ -1217,11 +1217,14 @@ func (c *Cluster) shouldCreateLoadBalancerForService(role PostgresRole, spec *ac
 
 func (c *Cluster) generateService(role PostgresRole, spec *acidv1.PostgresSpec) *v1.Service {
 	var dnsName string
+	var loadBalancerIP string
 
 	if role == Master {
 		dnsName = c.masterDNSName()
+		loadBalancerIP = serviceSpec.MasterLoadBalancerIP || ""
 	} else {
 		dnsName = c.replicaDNSName()
+		loadBalancerIP = serviceSpec.ReplicaLoadBalancerIP || ""
 	}
 
 	serviceSpec := v1.ServiceSpec{
@@ -1248,6 +1251,10 @@ func (c *Cluster) generateService(role PostgresRole, spec *acidv1.PostgresSpec) 
 
 		c.logger.Debugf("final load balancer source ranges as seen in a service spec (not necessarily applied): %q", serviceSpec.LoadBalancerSourceRanges)
 		serviceSpec.Type = v1.ServiceTypeLoadBalancer
+
+		if loadBalancerIP != "" {
+			serviceSpec.LoadBalancerIP = loadBalancerIP
+		}
 
 		annotations = map[string]string{
 			constants.ZalandoDNSNameAnnotation: dnsName,

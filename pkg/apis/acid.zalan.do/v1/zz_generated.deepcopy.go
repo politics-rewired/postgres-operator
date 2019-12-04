@@ -444,9 +444,19 @@ func (in *PostgresSpec) DeepCopyInto(out *PostgresSpec) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.MasterLoadBalancerIP != nil {
+		in, out := &in.MasterLoadBalancerIP, &out.MasterLoadBalancerIP
+		*out = new(string)
+		**out = **in
+	}
 	if in.EnableReplicaLoadBalancer != nil {
 		in, out := &in.EnableReplicaLoadBalancer, &out.EnableReplicaLoadBalancer
 		*out = new(bool)
+		**out = **in
+	}
+	if in.ReplicaLoadBalancerIP != nil {
+		in, out := &in.ReplicaLoadBalancerIP, &out.ReplicaLoadBalancerIP
+		*out = new(string)
 		**out = **in
 	}
 	if in.UseLoadBalancer != nil {
